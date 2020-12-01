@@ -1,12 +1,13 @@
 package com.module;
 
-import com.property.PropReader;
+import com.property.impl.ImplDBPropReader;
 
 public class StartModule {
 	
-	private void readProperties() {
-		PropReader props = new PropReader();
-	}
+	//DB를 통한
+	
+	
+	
 
 	public static void main(String[] args) {
 	
