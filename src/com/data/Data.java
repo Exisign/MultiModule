@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface Data{
 	List dataList = new ArrayList();
+//	public void initList();
 }
