@@ -3,7 +3,6 @@ package com.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Data{
-	List dataList = new ArrayList();
-//	public void initList();
+public interface Data<T extends Enum>{
+	public void initList(Class<T> clazz);
 }
