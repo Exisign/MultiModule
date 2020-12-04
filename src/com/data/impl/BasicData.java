@@ -54,7 +54,7 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 	}
 	
 	public O getValue(E enumClass) throws Exception{
-		return getValue(enumClass);
+		return getValue(enumClass.ordinal());
 	}
 	
 	public O getValue(int index) throws Exception{
