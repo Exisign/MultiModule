@@ -30,21 +30,24 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 			}
 			
 			for(int i = 0; i < obj.length; i++) {
-					this.dataList.add((O) new Object());
+					this.dataList.add(null);
 			}
 		}
 	}
 	
-	public boolean setColumnData(O obj, E enumClass) throws Exception{
+	@Override
+	public boolean setColumnData(Object obj, Enum enumClass) throws Exception {
+		// TODO Auto-generated method stub
 		return setColumnData(obj, enumClass.ordinal());
 	}
 	
-	public boolean setColumnData(O obj, int index) throws Exception{
+	
+	public boolean setColumnData(Object obj, int index) throws Exception{
 		
 		boolean isSuccess = false;
 		
 		try {
-			this.dataList.set(index, obj);
+			this.dataList.set(index,(O)obj);
 			isSuccess = true;
 		}catch(Exception e) {
 			throw e;
@@ -53,7 +56,7 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 		return isSuccess;
 	}
 	
-	public O getValue(E enumClass) throws Exception{
+	public Object getValue(Enum enumClass) throws Exception{
 		return getValue(enumClass.ordinal());
 	}
 	
@@ -79,13 +82,16 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 		if(this.dataList!=null) {
 			copyList.addAll(this.dataList);
 		}
+		
+		System.out.println(copyList.toString());
 		return copyList;
 	}
 	
 	public static void main(String[] args) throws Exception {
-		BasicData td = new BasicData<String, TestDataEnum>(TestDataEnum.class);
-		td.setColumnData("123", TestDataEnum.ID);
+		Data td = new BasicData<String, TestDataEnum>(TestDataEnum.class);
 		
+		td.getSwallowCopyList();
+		td.setColumnData("123", TestDataEnum.ID);
 		List list = td.getSwallowCopyList();
 	}
 }
