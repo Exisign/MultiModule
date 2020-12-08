@@ -32,4 +32,11 @@ public class ImplFilePropReader implements PropReader{
 		WHOLE_ENCODING	=	(String)properties.getProperty("whole.encoding");
 		LOG4J2_PATH		=	(String)properties.getProperty("log4j2.path");
 	}
+
+	@Override
+	public Properties getProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

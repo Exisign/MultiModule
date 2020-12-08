@@ -11,12 +11,16 @@ public class ImplDBPropReader implements PropReader{
 	
 	private Properties properties = new Properties();
 	
-	public String DB_DRIVER = "";
-	public String DB_CONNECTION = "";
-	public String DB_ID = "";
-	public String DB_PASSWORD = "";
+	public static String DB_DRIVER = "";
+	public static String DB_CONNECTION = "";
+	public static String DB_ID = "";
+	public static String DB_PASSWORD = "";
 	
-	public String LOG4J2_PATH = "";
+	public static String LOG4J2_PATH = "";
+	
+	public ImplDBPropReader(String path) throws IOException {
+		readPropertiese(path);
+	}
 	
 	public void readPropertiese(String path) throws IOException {
 		FileInputStream fis = new FileInputStream(path);
@@ -31,5 +35,10 @@ public class ImplDBPropReader implements PropReader{
 		DB_PASSWORD		=	(String)properties.getProperty("db.password");
 		
 		LOG4J2_PATH		=	(String)properties.getProperty("log4j2.path");
+	}
+
+	@Override
+	public Properties getProperties() {
+		return properties;
 	}
 }

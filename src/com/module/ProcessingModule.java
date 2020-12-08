@@ -1,5 +1,7 @@
 package com.module;
 
-public interface ProcessingModule<T> extends Module<T>{
-	public void processingData(T data);
+import java.util.List;
+
+public interface ProcessingModule extends Module{
+	public void processingData(List<String> data);
 }

@@ -33,4 +33,10 @@ public class ImplThreadPropReader implements PropReader{
 		
 	}
 
+	@Override
+	public Properties getProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

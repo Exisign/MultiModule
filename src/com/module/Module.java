@@ -1,7 +1,9 @@
 package com.module;
 
-public interface Module<T> {
-	public boolean readProperty();
-	public T readData();
-	public void sendData(T data);
+import java.util.List;
+import java.util.Properties;
+import java.util.Queue;
+
+public interface Module{
+	public void readProperty(Properties properties) throws Exception;
 }
