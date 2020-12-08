@@ -21,4 +21,5 @@ doc/**/*.pdf
 *.class
 .classpath
 *.prop
-/com/test/*
+/src/com/test
+/src/com/data/attribute
