@@ -20,4 +20,5 @@ doc/**/*.pdf
 
 *.class
 .classpath
+*.prop
 /com/test/*
