@@ -1,10 +1,18 @@
 package com.module.impl;
 
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import com.attribute.SocketE;
 import com.module.SendModule;
@@ -13,7 +21,7 @@ import com.util.Parser;
 public class SendThreadModule<T extends Collection> implements SendModule{
 
 	List<String> ipPortList = new LinkedList<String>();
-	List<Socket> socketList = new LinkedList<Socket>();
+	Queue<Socket> socketQueue = new LinkedBlockingQueue<Socket>();
 	
 	private String essentialIP = "";
 	private String delimiter = "";
@@ -33,7 +41,7 @@ public class SendThreadModule<T extends Collection> implements SendModule{
 				try {
 					int port = Integer.parseInt(arrIpPort[SocketE.PORT.ordinal()]);
 					socket = new Socket(arrIpPort[SocketE.IP.ordinal()], port);
-					socketList.add(socket);
+					socketQueue.add(socket);
 				}catch(Exception e){
 					if(socket!=null){
 						try{
@@ -66,5 +74,39 @@ public class SendThreadModule<T extends Collection> implements SendModule{
 	public void sendData(Collection collectionChild) throws Exception {
 		// TODO Auto-generated method stub
 		
+		T queue = (T)new LinkedBlockingQueue<String>();
+		queue.addAll(collectionChild);
+		
+		int threadCount = 10;
+		
+		ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
+		ThreadPoolExecutor threadPoolExcecutor = (ThreadPoolExecutor) executorService;
+		List<DataSendThead> threadList = new ArrayList();
+		
+		for(int i = 0; i < queue.size(); i++) {
+			
+			Socket tSocket = socketQueue.poll();
+			
+			if(tSocket!=null) {
+				threadList.add(new DataSendThead(queue.toArray(), tSocket));
+			}
+		}
+		
+	}
+}
+
+class DataSendThead implements Runnable{
+
+	private Object[] object = {};
+	private Socket socket = new Socket();
+	
+	DataSendThead(Object[] object, Socket socket) {
+		this.object = object;
+		this.socket = socket;
+	}
+
+	@Override
+	public void run() {
+		Object[] obj = object;
 	}
 }
