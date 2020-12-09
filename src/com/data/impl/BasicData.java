@@ -15,7 +15,7 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 		super();
 	}
 
-	BasicData(Class<E> clazz) {
+	public BasicData(Class<E> clazz) {
 		this();
 		initList(clazz);
 	}
@@ -82,16 +82,6 @@ public class BasicData<O extends Object, E extends Enum> implements Data{
 		if(this.dataList!=null) {
 			copyList.addAll(this.dataList);
 		}
-		
-		System.out.println(copyList.toString());
 		return copyList;
-	}
-	
-	public static void main(String[] args) throws Exception {
-		Data td = new BasicData<String, TestDataEnum>(TestDataEnum.class);
-		
-		td.getSwallowCopyList();
-		td.setColumnData("123", TestDataEnum.ID);
-		List list = td.getSwallowCopyList();
 	}
 }
